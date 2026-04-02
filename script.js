@@ -19,37 +19,37 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     tasks.push(newTask);
     saveTask();
-    renderTask(newTask)
+    renderTask(newTask);
     todoInput.value = ""; //clear input
     console.log(tasks);
   });
 
   function renderTask(task) {
-    const li = document.createElement('li')
-    li.setAttribute('data-id',task.id)
-    if(task.completed) li.classList.add('completed')
+    const li = document.createElement("li");
+    li.setAttribute("data-id", task.id);
+    if (task.completed) li.classList.add("completed");
     li.innerHTML = `
     <span>${task.text}</span>
     <button>delete</button>`;
-li.addEventListener("click", (e) => {
-  if (e.target.tagName === "BUTTON") return;
+    li.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") return;
 
-  task.completed = !task.completed;
-  li.classList.toggle("completed");
+      task.completed = !task.completed;
+      li.classList.toggle("completed");
 
-  if (task.completed) {
-    celebrate();
-  }
+      if (task.completed) {
+        celebrate();
+      }
 
-  saveTask();
-});
-li.querySelector('button').addEventListener('click',(e)=>{
-  e.stopPropagation()//prevent toggle from firing
-  tasks = tasks.filter(t=>t.id !== task.id)
-  li.remove()
-  saveTask();
-})
-    todoList.appendChild(li)
+      saveTask();
+    });
+    li.querySelector("button").addEventListener("click", (e) => {
+      e.stopPropagation(); //prevent toggle from firing
+      tasks = tasks.filter((t) => t.id !== task.id);
+      li.remove();
+      saveTask();
+    });
+    todoList.appendChild(li);
   }
 
   // add the all task to local storage
@@ -81,7 +81,7 @@ function celebrate() {
     const duration = Math.random() * 1 + 0.8;
     confetti.style.animationDuration = duration + "s";
 
-    // random delay (🔥 makes it natural)
+    // random delay (makes it natural)
     confetti.style.animationDelay = Math.random() * 0.5 + "s";
 
     document.body.appendChild(confetti);
